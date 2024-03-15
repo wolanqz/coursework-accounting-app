@@ -17,7 +17,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th>Время создания</th>
                                 <th>Тип перемещения товара</th>
                                 <th>Направление перемещения товара</th>
                             </tr>
@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach ($movements as $movement)
                                 <tr>
-                                    <td>{{ $movement->id }}</td>
+                                    <td>{{ $movement->created_at }}</td>
                                     <td>{{ $movement->movement_type_name }}</td>
                                     <td>{{ $movement->movement_direction_type_name }}</td>
                                     <td><a href="{{ route('movements.edit', $movement->id) }}">Редактировать</a></td>

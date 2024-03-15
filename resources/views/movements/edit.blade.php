@@ -42,18 +42,14 @@
                             <tr>
                                 <th>id</th>
                                 <th>Время создания</th>
-                                {{-- <th>Направление перемещения товара</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($movement_lines as $line)
                             <tr>
-                                {{-- <option value="1">{{ $movement->movement_direction_type_name}} ({{ $type->direction_name }})</option> --}}
                                 <td>{{ $line->id }}</td>
                                 <td>{{ $line->created_at }}</td>
-                                {{-- <td>{{ $movement->movement_direction_type_name }}</td> --}}
                                 <td>
-                                    {{-- <a href="{{ route('movement_lines.destroy', $line->id) }}">Удалить</a> --}}
                                     <form method="POST" action="{{ route('movement_lines.destroy', $line->id) }}">
                                         @csrf
                                         @method('DELETE')

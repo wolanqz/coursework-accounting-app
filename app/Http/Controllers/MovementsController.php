@@ -19,15 +19,9 @@ class MovementsController extends Controller
             INNER JOIN movement_types
             ON movements.movement_type_id = movement_types.id AND movements.movement_direction_type_id = movement_types.movement_direction_type_id
             INNER JOIN movement_direction_types
-            ON movements.movement_direction_type_id = movement_direction_types.id;
+            ON movements.movement_direction_type_id = movement_direction_types.id
+            ORDER BY movements.created_at;
         ');
-
-        // $movements = DB::select('
-        //     SELECT movements.*, movement_direction_types.name AS movement_direction_type_name
-        //     FROM movements
-        //     INNER JOIN movement_direction_types
-        //     ON movements.movement_direction_type_id = movement_direction_types.id;
-        // ');
 
         return view('movements.index', ['movements' =>  $movements]);
     }
@@ -84,14 +78,6 @@ class MovementsController extends Controller
             WHERE movements.id = ?;
         ', [$id]);
 
-        // $movements = DB::select('
-        //     SELECT movements.*, movement_types.name AS movement_type_name, movement_direction_types.name AS movement_direction_type_name
-        //     FROM movements
-        //     INNER JOIN movement_direction_types
-        //     ON movements.movement_direction_type_id = movement_direction_types.id
-        //     WHERE movements.id = ?;
-        // ', [$id]);
-
         $movement_types = DB::select('
             SELECT movement_types.*, movement_direction_types.name AS movement_direction_type_name, movement_direction_types.id AS movement_direction_type_id
             FROM movement_types
@@ -100,15 +86,11 @@ class MovementsController extends Controller
         ');
 
         $movement_lines = DB::select('SELECT * FROM movement_lines WHERE movement_id = ?', [$id]);
-        // $movement_direction_types = DB::select('
-        //     SELECT * FROM movement_direction_types;
-        // ');
 
         return view('movements.edit', [
             'movement' => $movements[0],
             'movement_types' => $movement_types,
             'movement_lines' => $movement_lines
-            // 'movement_direction_types' => $movement_direction_types
         ]);
     }
 
